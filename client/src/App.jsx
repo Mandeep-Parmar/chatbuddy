@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import ChatBox from "./components/ChatBox";
 import Credits from "./pages/Credits";
 import Community from "./pages/Community";
+import { assets } from "./assets/assets";
 
 const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <>
+      {!isSidebarOpen && (
+        <img
+          src={assets.menu_icon}
+          onClick={() => setIsSidebarOpen(true)}
+          className="absolute top-3 left-3 w-8 h-8 cursor-pointer md:hidden not-dark:invert"
+        />
+      )}
+
       <div className="dark:bg-gradient-to-b from-[#242124] to-[#000000] dark:text-white">
         <div className="flex h-screen w-screen">
-          <Sidebar />
+          <Sidebar
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
           <Routes>
             <Route path="/" element={<ChatBox />} />
             <Route path="/credits" element={<Credits />} />
