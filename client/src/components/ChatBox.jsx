@@ -3,6 +3,7 @@ import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import logo_light from "../assets/logo_light.png";
 import logo_dark from "../assets/logo_dark.png";
+import Message from "./Message";
 
 const ChatBox = () => {
   const { selectedChat, theme } = useAppContext();
@@ -32,6 +33,10 @@ const ChatBox = () => {
             </p>
           </div>
         )}
+
+        {messages.map((message, index) => (
+          <Message key={index} message={message} />
+        ))}
       </div>
 
       {/* Promp Input Box */}
