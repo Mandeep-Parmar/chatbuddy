@@ -5,6 +5,8 @@ import {
   getChats,
 } from "../controllers/chatController.js";
 import auth from "../middlewares/auth.js";
+import validate from "../middlewares/validate.js";
+import { deleteChatSchema } from "../validations/chatValidation.js";
 
 const chatRouter = express.Router();
 
@@ -15,6 +17,6 @@ chatRouter.post("/", auth, createChat);
 chatRouter.get("/", auth, getChats);
 
 // Delete a specific chat
-chatRouter.delete("/:chatId", auth, deleteChat);
+chatRouter.delete("/:chatId", auth, validate(deleteChatSchema), deleteChat);
 
 export default chatRouter;
