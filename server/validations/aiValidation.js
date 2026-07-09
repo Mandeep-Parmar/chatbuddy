@@ -1,14 +1,19 @@
 import Joi from "joi";
-import { objectId } from "./commonValidation.js";
+import { objectId, prompt } from "./commonValidation.js";
 
 export const textMessageSchema = Joi.object({
   chatId: objectId,
 
-  prompt: Joi.string().trim().min(1).max(4000).required().messages({
-    "string.base": "Prompt must be a string",
-    "string.empty": "Prompt cannot be empty",
-    "string.min": "Prompt cannot be empty",
-    "string.max": "Prompt cannot exceed 4000 characters",
-    "any.required": "Prompt is required",
+  prompt,
+});
+
+export const imageMessageSchema = Joi.object({
+  chatId: objectId,
+
+  prompt,
+
+  isPublished: Joi.boolean().required().messages({
+    "boolean.base": "isPublished must be true or false",
+    "any.required": "isPublished is required",
   }),
 });

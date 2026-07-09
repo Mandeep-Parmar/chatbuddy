@@ -5,7 +5,10 @@ import {
   textMessageController,
 } from "../controllers/aiController.js";
 import validate from "../middlewares/validate.js";
-import { textMessageSchema } from "../validations/aiValidation.js";
+import {
+  imageMessageSchema,
+  textMessageSchema,
+} from "../validations/aiValidation.js";
 
 const aiRouter = express.Router();
 
@@ -16,6 +19,11 @@ aiRouter.post(
   textMessageController,
 );
 
-aiRouter.post("/image", auth, imageMessageController);
+aiRouter.post(
+  "/image",
+  auth,
+  validate(imageMessageSchema),
+  imageMessageController,
+);
 
 export default aiRouter;
