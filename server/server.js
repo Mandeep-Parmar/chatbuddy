@@ -5,6 +5,7 @@ import connectDB from "./configs/mongodb.js";
 import userRouter from "./routes/userRoutes.js";
 import chatRouter from "./routes/chatRoutes.js";
 import aiRouter from "./routes/aiRoutes.js";
+import communityRouter from "./routes/communityRoute.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/chats", chatRouter);
 app.use("/api/ai", aiRouter);
+app.use("/api/community", communityRouter);
 
 const PORT = process.env.PORT || 3000;
 
