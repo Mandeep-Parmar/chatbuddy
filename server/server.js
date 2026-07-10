@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoutes.js";
 import chatRouter from "./routes/chatRoutes.js";
 import aiRouter from "./routes/aiRoutes.js";
 import communityRouter from "./routes/communityRoute.js";
+import planRouter from "./routes/planRoute.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api/users", userRouter);
 app.use("/api/chats", chatRouter);
 app.use("/api/ai", aiRouter);
 app.use("/api/community", communityRouter);
+app.use("/api/plans", planRouter);
 
 const PORT = process.env.PORT || 3000;
 
