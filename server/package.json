@@ -21,6 +21,7 @@
     "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.3",
-    "openai": "^6.45.0"
+    "openai": "^6.45.0",
+    "stripe": "^22.3.1"
   }
 }

@@ -1,4 +1,4 @@
-import { plans } from "../configs/plans";
+import { plans } from "../configs/plans.js";
 
 export const getPlans = async (req, res) => {
   try {
