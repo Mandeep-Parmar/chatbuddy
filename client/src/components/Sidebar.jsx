@@ -138,90 +138,103 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 }
                 src={assets.bin_icon}
                 alt="bin"
-                className="hidden group-hover:block w-4 cursor-pointer not-dark:invert"
+                className="block md:hidden md:group-hover:block w-4 cursor-pointer not-dark:invert opacity-60 hover:opacity-100 transition-opacity"
               />
             </div>
           ))}
       </div>
 
-      {/* Community Images */}
-      <div
-        onClick={() => {
-          navigate("/community");
-          setIsSidebarOpen(false);
-        }}
-        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
-      >
-        <img
-          src={assets.gallery_icon}
-          alt="gallery"
-          className="w-4.5 not-dark:invert"
-        />
+      {/* Footer / Settings Section */}
+      <div className="mt-auto pt-4 border-t border-gray-200 dark:border-white/10">
+        {/* Navigation Grid (Community & Credits) */}
+        <div className="grid grid-cols-2 gap-2">
+          {/* Community Images */}
+          <div
+            onClick={() => {
+              navigate("/community");
+              setIsSidebarOpen(false);
+            }}
+            className="flex items-center justify-center gap-2 p-2.5 border border-gray-300 dark:border-white/10 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-200"
+            title="Community Images"
+          >
+            <img
+              src={assets.gallery_icon}
+              alt="gallery"
+              className="w-4 h-4 not-dark:invert opacity-75"
+            />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-200">
+              Community
+            </span>
+          </div>
 
-        <p className="text-sm">Community Images</p>
-      </div>
-
-      {/* Credits Purchases Options */}
-      <div
-        onClick={() => {
-          navigate("/credits");
-          setIsSidebarOpen(false);
-        }}
-        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
-      >
-        <img
-          src={assets.diamond_icon}
-          alt="credit"
-          className="w-4.5 dark:invert"
-        />
-
-        <div className="flex flex-col text-sm">
-          <p>Credits: {user?.credits}</p>
-          <p className="text-xs text-gray-400">
-            Purchase credits to use ChatBuddy
-          </p>
-        </div>
-      </div>
-
-      {/* Dark Mode Toggle */}
-      <div className="flex items-center justify-between gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md">
-        <div className="flex items-center gap-2 text-sm">
-          <img
-            src={assets.theme_icon}
-            alt="theme"
-            className="w-4 not-dark:invert"
-          />
-          <p>Dark Mode</p>
+          {/* Credits Purchases Options */}
+          <div
+            onClick={() => {
+              navigate("/credits");
+              setIsSidebarOpen(false);
+            }}
+            className="flex items-center justify-center gap-2 p-2.5 border border-gray-300 dark:border-white/10 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-200"
+            title="Credits Info"
+          >
+            <img
+              src={assets.diamond_icon}
+              alt="credit"
+              className="w-4 h-4 dark:invert opacity-75"
+            />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-200 truncate">
+              {user ? `${user.credits} Credits` : "Credits"}
+            </span>
+          </div>
         </div>
 
-        <label className="relative inline-flex cursor-pointer" htmlFor="theme">
-          <input
-            onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-            type="checkbox"
-            id="theme"
-            checked={theme === "dark"}
-            className="sr-only peer"
-          />
-          <div className="w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-purple-600 transition-all"></div>
-          <span className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform peer-checked:translate-x-4"></span>
-        </label>
-      </div>
+        {/* User Profile Card */}
+        <div className="flex items-center justify-between p-3 mt-3 border border-gray-300 dark:border-white/10 rounded-xl bg-gray-50/50 dark:bg-white/5 transition-all duration-200">
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <img
+              src={assets.user_icon}
+              alt="user"
+              className="w-8 h-8 rounded-full flex-shrink-0 border border-gray-200 dark:border-white/20"
+            />
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-bold truncate text-gray-800 dark:text-white">
+                {user ? user.name : "Guest User"}
+              </span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400 truncate">
+                {user ? "Standard Account" : "Please log in"}
+              </span>
+            </div>
+          </div>
 
-      {/* User Account */}
-      <div className="flex items-center gap-3 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer group">
-        <img src={assets.user_icon} alt="user" className="w-7 rounded-full" />
-        <p className="flex-1 text-sm dark:text-primary truncate">
-          {user ? user.name : "Login your account"}
-        </p>
+          <div className="flex items-center gap-1">
+            {/* Dark Mode Icon Button */}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-1.5 hover:bg-gray-200 dark:hover:bg-white/10 rounded-lg cursor-pointer transition-colors duration-200 flex items-center justify-center"
+              title="Toggle Dark Mode"
+            >
+              <img
+                src={assets.theme_icon}
+                alt="theme"
+                className="w-4 h-4 not-dark:invert opacity-75 hover:opacity-100 transition-opacity"
+              />
+            </button>
 
-        {user && (
-          <img
-            onClick={handleLogout}
-            src={assets.logout_icon}
-            alt="logout"
-            className="h-5 cursor-pointer hidden not-dark:invert group-hover:block"
-          />
-        )}
+            {/* Logout Button */}
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="p-1.5 hover:bg-red-500/10 dark:hover:bg-red-500/20 rounded-lg cursor-pointer transition-colors duration-200 flex items-center justify-center"
+                title="Log Out"
+              >
+                <img
+                  src={assets.logout_icon}
+                  alt="logout"
+                  className="w-4 h-4 not-dark:invert opacity-75 hover:opacity-100 transition-opacity"
+                />
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       <img
