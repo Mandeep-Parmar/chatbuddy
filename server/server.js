@@ -8,6 +8,7 @@ import aiRouter from "./routes/aiRoutes.js";
 import communityRouter from "./routes/communityRoute.js";
 import planRouter from "./routes/planRoute.js";
 import paymentRouter from "./routes/paymentRoutes.js";
+import { stripeWebhook } from "./controllers/paymentController.js";
 
 const app = express();
 
@@ -15,6 +16,17 @@ await connectDB();
 
 // middleware
 app.use(cors());
+
+// Register webhook BEFORE express.json()
+app.post(
+  "/api/payments/webhook",
+  // Instead of converting JSON,
+  // Express keeps it exactly as Stripe sent it.
+  express.raw({ type: "application/json" }),
+  stripeWebhook,
+);
+
+// Parse JSON for all other routes
 app.use(express.json());
 
 // routes
