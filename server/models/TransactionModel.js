@@ -19,9 +19,10 @@ const TransactionSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    isPaid: {
-      type: Boolean,
-      default: false,
+    status: {
+      type: String,
+      enum: ["pending", "paid", "failed"],
+      default: "pending",
     },
   },
   { timestamps: true },
