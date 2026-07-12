@@ -4,9 +4,10 @@ import { assets } from "../assets/assets";
 import logo_light from "../assets/logo_light.png";
 import logo_dark from "../assets/logo_dark.png";
 import Message from "./Message";
+import toast from "react-hot-toast";
 
 const ChatBox = () => {
-  const { selectedChat, theme } = useAppContext();
+  const { selectedChat, theme, user, axios, token, setUser } = useAppContext();
 
   const containerRef = useRef();
 
@@ -18,7 +19,58 @@ const ChatBox = () => {
   const [isPublished, setIsPublished] = useState(false);
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+
+      if (!user) return toast("Login to send message");
+
+      setLoading(true);
+
+      const promptCopy = prompt;
+      setPrompt("");
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "user",
+          content: prompt,
+          timestamp: Date.now(),
+          isImage: false,
+        },
+      ]);
+
+      const requestBody = {
+        chatId: selectedChat._id,
+        prompt,
+      };
+
+      if (mode === "image") {
+        requestBody.isPublished = isPublished;
+      }
+
+      const { data } = await axios.post(`/api/ai/${mode}`, requestBody, {
+        headers: { token },
+      });
+
+      if (data.success) {
+        setMessages((prev) => [...prev, data.reply]);
+
+        // decrease credits
+        if (mode === "image") {
+          setUser((prev) => ({ ...prev, credits: prev.credits - 2 }));
+        } else {
+          setUser((prev) => ({ ...prev, credits: prev.credits - 1 }));
+        }
+      } else {
+        toast.error(data.message);
+        setPrompt(promptCopy);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setPrompt("");
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -101,7 +153,7 @@ const ChatBox = () => {
           onChange={(e) => setPrompt(e.target.value)}
           value={prompt}
           type="text"
-          placeholder="Type your promp here..."
+          placeholder="Type your prompt here..."
           className="flex-1 w-full text-sm outline-none"
           required
         />

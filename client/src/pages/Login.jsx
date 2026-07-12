@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import logo_light from "../assets/logo_light.png";
 import logo_dark from "../assets/logo_dark.png";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { theme } = useAppContext();
+  const { theme, axios, setToken } = useAppContext();
 
-  const [state, setState] = useState("Login"); // "Login" or "Sign Up"
+  const [state, setState] = useState("login"); // "login" or "register"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -14,6 +15,36 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const url = state === "login" ? "/api/users/login" : "/api/users/register";
+
+    try {
+      let data;
+
+      if (state === "login") {
+        ({ data } = await axios.post(url, {
+          email,
+          password,
+        }));
+      } else {
+        ({ data } = await axios.post(url, {
+          name,
+          email,
+          password,
+        }));
+      }
+
+      if (data.success) {
+        setToken(data.token);
+        console.log("Local Storage:", localStorage.getItem("token"));
+
+        localStorage.setItem("token", data.token);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -30,17 +61,17 @@ const Login = () => {
 
         {/* Title */}
         <h2 className="text-2xl font-bold text-center mb-2">
-          {state === "Login" ? "Welcome Back" : "Create Account"}
+          {state === "login" ? "Welcome Back" : "Create Account"}
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
-          {state === "Login"
+          {state === "login"
             ? "Sign in to continue chatting with ChatBuddy"
             : "Sign up to start your journey with ChatBuddy"}
         </p>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {state === "Sign Up" && (
+          {state === "register" && (
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5">
                 Full Name
@@ -98,19 +129,18 @@ const Login = () => {
             type="submit"
             className="w-full py-3 mt-4 text-white font-medium bg-gradient-to-r from-[#A456F7] to-[#3D81F6] rounded-xl hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer shadow-lg shadow-purple-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {state === "Login" ? "Sign In" : "Sign Up"}
+            {state === "login" ? "Sign In" : "Sign Up"}
           </button>
         </form>
 
         {/* Form Toggle */}
         <p className="mt-6 text-sm text-center text-gray-500 dark:text-gray-400">
-          {state === "Login" ? (
+          {state === "login" ? (
             <>
               Don't have an account?{" "}
               <button
                 onClick={() => {
-                  setState("Sign Up");
-                  setError("");
+                  setState("register");
                 }}
                 className="text-purple-600 dark:text-purple-400 font-semibold hover:underline bg-transparent border-none cursor-pointer"
               >
@@ -122,7 +152,7 @@ const Login = () => {
               Already have an account?{" "}
               <button
                 onClick={() => {
-                  setState("Login");
+                  setState("login");
                 }}
                 className="text-purple-600 dark:text-purple-400 font-semibold hover:underline bg-transparent border-none cursor-pointer"
               >

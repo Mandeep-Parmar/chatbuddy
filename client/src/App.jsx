@@ -9,19 +9,21 @@ import "./assets/prism.css";
 import Loading from "./pages/Loading";
 import { useAppContext } from "./context/AppContext";
 import Login from "./pages/Login";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { user } = useAppContext();
+  const { user, loadingUser } = useAppContext();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { pathname } = useLocation();
 
   // we did not put it on routes because sidebar renders outside
-  if (pathname === "/loading") return <Loading />;
+  if (pathname === "/loading" || loadingUser) return <Loading />;
 
   return (
     <>
+      <Toaster />
       {!isSidebarOpen && (
         <img
           src={assets.menu_icon}
