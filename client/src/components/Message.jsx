@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { assets } from "../assets/assets";
 import moment from "moment";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Prism from "prismjs";
 import toast from "react-hot-toast";
 import { MdOutlineFileDownload } from "react-icons/md";
@@ -74,7 +75,7 @@ const Message = ({ message }) => {
             </div>
           ) : (
             <div className="text-sm dark:text-primary reset-tw">
-              <Markdown>{message.content}</Markdown>
+              <Markdown remarkPlugins={remarkGfm}>{message.content}</Markdown>
             </div>
           )}
 
