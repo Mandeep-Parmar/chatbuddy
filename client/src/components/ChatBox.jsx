@@ -18,6 +18,48 @@ const ChatBox = () => {
   const [mode, setMode] = useState("text");
   const [isPublished, setIsPublished] = useState(false);
 
+  // Display the AI reply word by word (typing effect)
+  const typeWriterEffect = async (reply) => {
+    // Split the full reply into individual words
+    const words = reply.content.split(" ");
+
+    // This will store the words typed so far
+    let typedText = "";
+
+    // Add an empty assistant message first
+    setMessages((prev) => [
+      ...prev,
+      {
+        ...reply,
+        content: "",
+      },
+    ]);
+
+    // show one word at a time
+    for (let i = 0; i < words.length; i++) {
+      // add next word
+      typedText += words[i] + " ";
+
+      // Small delay to create the typing animation
+      await new Promise((resolve) => {
+        setTimeout(resolve, 40);
+      });
+
+      // Update only the latest AI messages
+      setMessages((prev) => {
+        const updatedMessages = [...prev];
+
+        // Replace the last message with the updated text
+        updatedMessages[updatedMessages.length - 1] = {
+          ...reply,
+          content: typedText,
+        };
+
+        return updatedMessages;
+      });
+    }
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -53,7 +95,7 @@ const ChatBox = () => {
       });
 
       if (data.success) {
-        setMessages((prev) => [...prev, data.reply]);
+        await typeWriterEffect(data.reply);
 
         // decrease credits
         if (mode === "image") {
