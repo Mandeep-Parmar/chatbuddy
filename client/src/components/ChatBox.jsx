@@ -10,6 +10,7 @@ const ChatBox = () => {
   const { selectedChat, theme, user, axios, token, setUser } = useAppContext();
 
   const containerRef = useRef();
+  const textareaRef = useRef();
 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -112,6 +113,11 @@ const ChatBox = () => {
     } finally {
       setPrompt("");
       setLoading(false);
+
+      // Reset textarea height
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+      }
     }
   };
 
@@ -176,12 +182,13 @@ const ChatBox = () => {
       {/* Promp Input Box */}
       <form
         onSubmit={onSubmit}
-        className="bg-primary/20 dark:bg-[#583C79]/30 border border-primary dark:border-[#80609F]/30 rounded-full w-full max-w-2xl p-3 pl-4 mx-auto flex gap-4 items-center"
+        className="bg-primary/20 dark:bg-[#583C79]/30 border border-primary dark:border-[#80609F]/30 rounded-3xl w-full max-w-2xl p-3 pl-4 mx-auto flex gap-4 items-center"
       >
         <select
           onChange={(e) => setMode(e.target.value)}
           value={mode}
-          className="text-sm pl-3 pr-2 outline-none"
+          disabled={loading}
+          className="text-sm outline-none"
         >
           <option className="dark:bg-purple-900" value="text">
             Text
@@ -191,12 +198,27 @@ const ChatBox = () => {
           </option>
         </select>
 
-        <input
-          onChange={(e) => setPrompt(e.target.value)}
+        <textarea
+          ref={textareaRef}
+          onChange={(e) => {
+            setPrompt(e.target.value);
+            e.target.style.height = "auto";
+            e.target.style.height = e.target.scrollHeight + "px";
+          }}
+          onKeyDown={(e) => {
+            // Enter = Send
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              e.currentTarget.form.requestSubmit();
+            }
+
+            // Shift + Enter = New Line (default behavior)
+          }}
           value={prompt}
-          type="text"
+          rows={1}
+          disabled={loading}
           placeholder="Type your prompt here..."
-          className="flex-1 w-full text-sm outline-none"
+          className="flex-1 w-full text-sm outline-none max-h-30 resize-none"
           required
         />
 
