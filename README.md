@@ -38,8 +38,8 @@ The project showcases full-stack engineering concepts including secure authentic
 
 | Resource | Link |
 |---|---|
-| 🌐 Website | [chatbuddy.vercel.app](https://your-live-demo-link.vercel.app) |
-| 🔌 API | [chatbuddy-api.onrender.com](https://your-api-link.onrender.com) |
+| 🌐 Website | [chatbuddy.vercel.app](https://chatbuddy-live.vercel.app) |
+| 🔌 API | [chatbuddy-api.onrender.com](https://chatbuddy-server.onrender.com) |
 | 🎥 Demo Video | [Watch here](https://your-demo-video-link.com) |
 
 <br/>
@@ -240,8 +240,9 @@ npm run server         # start the server with nodemon
 
 **Mandeep Parmar**
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourusername)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mandeep-Parmar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mandeep-p-b44930327/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:mandeeppar07@gmail.com)
 
 ⭐ If you found ChatBuddy helpful, consider giving this repository a star!
 
