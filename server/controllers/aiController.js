@@ -59,7 +59,7 @@ export const textMessageController = async (req, res) => {
     ];
 
     const response = await openai.chat.completions.create({
-      model: "gemini-3.5-flash",
+      model: process.env.GEMINI_MODEL,
       messages: conversationHistory,
     });
 
@@ -79,7 +79,23 @@ export const textMessageController = async (req, res) => {
 
     res.json({ success: true, reply });
   } catch (error) {
-    res.json({ success: false, message: error.message });
+    console.error(error);
+
+    let message = "Something went wrong.";
+
+    if (error.status === 429) {
+      message =
+        "AI service is busy or the free API quota has been reached. Please try again later.";
+    } else if (error.status === 500) {
+      message = "AI service encountered an internal error.";
+    } else if (error.status === 503) {
+      message = "AI service is temporarily unavailable.";
+    }
+
+    return res.status(error.status || 500).json({
+      success: false,
+      message,
+    });
   }
 };
 
