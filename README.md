@@ -38,8 +38,8 @@ The project showcases full-stack engineering concepts including secure authentic
 
 | Resource | Link |
 |---|---|
-| 🌐 Website | [chatbuddy.vercel.app](https://chatbuddy-live.vercel.app) |
-| 🔌 API | [chatbuddy-api.onrender.com](https://chatbuddy-server.onrender.com) |
+| 🌐 Website | [chatbuddy-live.vercel.app](https://chatbuddy-live.vercel.app) |
+| 🔌 API | [chatbuddy-server.onrender.com](https://chatbuddy-server.onrender.com) |
 | 🎥 Demo Video | [Watch here](https://your-demo-video-link.com) |
 
 <br/>
