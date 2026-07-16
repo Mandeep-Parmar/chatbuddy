@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://via.placeholder.com/140x140.png?text=CB" alt="ChatBuddy Logo" width="110" />
+<img src="./assets/logo.png" alt="ChatBuddy Logo" width="120" />
 
 # 💬 ChatBuddy
 
@@ -40,7 +40,6 @@ The project showcases full-stack engineering concepts including secure authentic
 |---|---|
 | 🌐 Website | [chatbuddy-live.vercel.app](https://chatbuddy-live.vercel.app) |
 | 🔌 API | [chatbuddy-server.onrender.com](https://chatbuddy-server.onrender.com) |
-| 🎥 Demo Video | [Watch here](https://your-demo-video-link.com) |
 
 <br/>
 
@@ -60,17 +59,17 @@ The project showcases full-stack engineering concepts including secure authentic
 
 | Landing Page | Login |
 |---|---|
-| <img src="https://via.placeholder.com/450x280.png?text=Landing+Page" width="400"/> | <img src="https://via.placeholder.com/450x280.png?text=Login" width="400"/> |
-| *First impression & value prop* | *JWT-secured authentication* |
+| <img src="./assets/landing-page.png" alt="Landing Page" width="400"/> | <img src="./assets/login-page.png" alt="Login Page" width="400"/> |
+| *Modern landing page introducing ChatBuddy* | *JWT-secured authentication* |
 
 | Chat Interface | AI Image Generation |
 |---|---|
-| <img src="https://via.placeholder.com/450x280.png?text=Chat" width="400"/> | <img src="https://via.placeholder.com/450x280.png?text=AI+Image" width="400"/> |
+| <img src="./assets/chat-interface.png" alt="Chat Interface" width="400"/> | <img src="./assets/ai-image-generation.png" alt="AI Image Generation" width="400"/> |
 | *Real-time chat with Markdown rendering* | *Prompt-to-image generation* |
 
 | Community Gallery | Pricing |
 |---|---|
-| <img src="https://via.placeholder.com/450x280.png?text=Community" width="400"/> | <img src="https://via.placeholder.com/450x280.png?text=Pricing" width="400"/> |
+| <img src="./assets/community-gallery.png" alt="Community Gallery" width="400"/> | <img src="./assets/pricing-page.png" alt="Pricing Page" width="400"/> |
 | *Published AI images from all users* | *Stripe-backed credit plans* |
 
 </div>
@@ -166,6 +165,7 @@ npm run server         # start the server with nodemon
 | `MONGODB_URI` | MongoDB Atlas connection string |
 | `JWT_SECRET` | Secret used to sign auth tokens |
 | `GEMINI_API_KEY` | Auth key for Gemini AI text generation |
+| `GEMINI_MODEL` | Gemini AI model for text generation |
 | `IMAGEKIT_PUBLIC_KEY` / `IMAGEKIT_PRIVATE_KEY` | ImageKit credentials for AI image generation |
 | `IMAGEKIT_URL_ENDPOINT` | ImageKit media delivery endpoint |
 | `STRIPE_SECRET_KEY` | Stripe server-side secret key |
