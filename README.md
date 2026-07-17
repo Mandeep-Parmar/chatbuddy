@@ -40,6 +40,7 @@ The project showcases full-stack engineering concepts including secure authentic
 |---|---|
 | 🌐 Website | [chatbuddy-live.vercel.app](https://chatbuddy-live.vercel.app) |
 | 🔌 API | [chatbuddy-server.onrender.com](https://chatbuddy-server.onrender.com) |
+| 🎥 Demo Video | [Watch here](https://www.linkedin.com/posts/mandeep-p-b44930327_react-nodejs-expressjs-activity-7483860378632814592-76Pf) |
 
 <br/>
 
@@ -189,14 +190,14 @@ npm run server         # start the server with nodemon
 
 ## ⭐ Engineering Highlights
 
-- 🏗️ MVC architecture with clear separation of concerns
-- 🔌 REST APIs designed around resources, not endpoints-as-actions
-- 🔐 JWT authentication with route-level protection
-- ✅ Joi validation on every mutating request
-- 🔔 Stripe webhooks verified via signature, not trusted blindly
-- 📱 Fully responsive design, no desktop-only assumptions
-- 🧩 Reusable component architecture on the frontend
-- 🌱 Environment-based config for clean dev/prod separation
+- MVC architecture with clear separation of concerns
+- REST APIs designed around resources, not endpoints-as-actions
+- JWT authentication with route-level protection
+- Joi validation on every mutating request
+- Stripe webhooks verified via signature, not trusted blindly
+- Fully responsive design, no desktop-only assumptions
+- Reusable component architecture on the frontend
+- Environment-based config for clean dev/prod separation
 
 <br/>
 
