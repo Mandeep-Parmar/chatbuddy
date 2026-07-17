@@ -10,6 +10,7 @@ import Loading from "./pages/Loading";
 import { useAppContext } from "./context/AppContext";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const { user, loadingUser } = useAppContext();
@@ -43,6 +44,7 @@ const App = () => {
               <Route path="/" element={<ChatBox />} />
               <Route path="/credits" element={<Credits />} />
               <Route path="/community" element={<Community />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>
